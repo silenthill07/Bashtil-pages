@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ملفات بشتيل - قاعدة بيانات</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+        body {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+            background-color: #121212;
+            color: #E0E0E0;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .card {
+            background-color: #1E1E1E;
+            border: 1px solid #333;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.6);
+        }
+        .download-btn {
+            background-color: #007BFF;
+            color: white;
+            transition: background-color 0.2s;
+        }
+        .download-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body class="p-6">
+
+    <div class="container mx-auto">
+        
+        <!-- Header -->
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold text-red-500 mb-2 tracking-wide">ملفات بشتيل</h1>
+            <p class="text-lg md:text-xl text-gray-400">قاعدة بيانات</p>
+        </header>
+
+        <!-- Download Section -->
+        <div class="text-center mb-10">
+            <button id="download-btn" class="download-btn py-3 px-8 rounded-full font-bold text-lg shadow-lg">تنزيل التقرير الكامل (ملف وورد)</button>
+        </div>
+
+        <!-- Data Cards Section -->
+        <div id="data-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Data cards will be injected here by JavaScript -->
+        </div>
+
+    </div>
+
+    <script>
+        const data = [
+            {
+                name: "بشتيل الان",
+                url: "https://www.facebook.com/p/%D8%A8%D8%B4%D8%AA%D9%8A%D9%84-%D8%A7%D9%84%D8%A7%D9%86-100065010211465/",
+                details: [
+                    "التوجه السياسي : وطني راسمالي -",
+                    "موضوعات الصفحه : اخبار _ حوادث _ اعلانات",
+                    "الاستاذ احمد فضل"
+                ]
+            },
+            {
+                name: "مجلس ادارة الشارع بشتيل",
+                url: "https://www.facebook.com/bashteel2020",
+                details: [
+                    "مدونه شخصيه",
+                    "التوجه السياسي : وطني -",
+                    "موضوعات الصفحه : رياضه _ اخبار _فيديوهات",
+                    "بدايه النشاط : 2022"
+                ]
+            },
+            {
+                name: "بشتيل اليوم",
+                url: "https://www.facebook.com/Bashtiel/",
+                details: [
+                    "التوجه السياسي : سلفي",
+                    "موضوعات الصفحه : اخبار _ اعلانات",
+                    "الاستاذ حماده ابو خضره",
+                    "بدايه النشاط : 2012"
+                ]
+            },
+            {
+                name: "مركز شباب بشتيل",
+                url: "https://www.facebook.com/p/%D9%85%D8%B1%D9%83%D8%B2-%D8%B4%D8%A8%D8%A7%D8%A8-%D8%A8%D8%B4%D8%AA%D9%8A%D9%84-%D8%A7%D9%84%D8%B5%D9%81%D8%AD%D9%87-%D8%A7%D9%84%D8%B1%D8%B3%D9%85%D9%8A%D9%87-100086779407604/",
+                details: [
+                    "منظمه حكوميه",
+                    "موضوعات الصفحه : اخبار",
+                    "بدايه النشاط : 2022"
+                ]
+            },
+            {
+                name: "مجموعة بشتيل لحظة بلحظة",
+                url: "https://www.facebook.com/groups/236151657687449/",
+                details: [
+                    "يديرها : احمد صالح المحامي",
+                    "موضوعات المجموعة : متنوعه",
+                    "بدايه النشاط : 2023",
+                    "رقم الهاتف : 01027222649"
+                ]
+            },
+            {
+                name: "أهالي بشتيل شارع الجمعية",
+                url: "https://www.facebook.com/groups/458011265953031",
+                details: [
+                    "يديرها : مصطفى حمزاوي",
+                    "التوجه السياسي : سلفي",
+                    "موضوعات المجموعة : متنوعه",
+                    "بدايه النشاط : 2022",
+                    "رقم الهاتف : 01271719955"
+                ]
+            },
+            {
+                name: "التابلت والتعليم الإلكتروني - مدرسة بشتيل الثانوية",
+                url: "https://www.facebook.com/saad.2022.ali",
+                details: [
+                    "أ / سعد مصطفى",
+                    "رئيس وحدة المعلومات والإحصاء"
+                ]
+            },
+            {
+                name: "البطل للأثاث",
+                url: "https://www.facebook.com/ElBatalEgypt",
+                details: [
+                    "صفحة تجارية",
+                    "رقم الهاتف : 01207335999"
+                ]
+            },
+            {
+                name: "دليل امبابة، مدينة الأمل، العمارة، بشتيل",
+                url: "https://www.facebook.com/p/%D8%AF%D9%84%D9%8A%D9%84-%D8%A7%D9%85%D8%A8%D8%A7%D8%A8%D8%A9%D9%85%D8%AF%D9%8A%D9%86%D8%A9-%D8%A7%D9%84%D8%A7%D9%85%D9%84%D8%A7%D9%84%D8%B9%D9%85%D8%A7%D8%B1%D8%A9%D8%A8%D8%B4%D8%AA%D9%8A%D9%84-100064336196299/",
+                details: [
+                    "ابو مازن ( محمد السواح )",
+                    "صفحه اخباريه"
+                ]
+            },
+            {
+                name: "وحدة خدمات بشتيل التجارية بنات",
+                url: "https://www.facebook.com/groups/1067057040948279/",
+                details: [
+                    "مجموعة",
+                    "حسن عامر مدرس",
+                    "هدف الانشاء : تجاري",
+                    "رقم الهاتف : 01090901001"
+                ]
+            },
+            {
+                name: "بشتيل البلد",
+                url: "https://www.facebook.com/millionyetelvalantain/about_profile_transparency",
+                details: [
+                    "صفحه خاملة"
+                ]
+            },
+            {
+                name: "عقارات بشتيل 2 مكتب كريم أبو أحمد",
+                url: "https://www.facebook.com/groups/220980933095447/",
+                details: [
+                    "صفحة تجارية"
+                ]
+            },
+            {
+                name: "عقارات بشتيل شقق ايجار قديم وجديد",
+                url: "https://www.facebook.com/p/%D8%B9%D9%82%D8%A7%D8%B1%D8%A7%D8%AA-%D8%A8%D8%B4%D8%AA%D9%8A%D9%84-%D8%B4%D9%82%D9%82-%D8%A7%D9%8A%D8%AC%D8%A7%D8%B1-%D9%82%D8%AF%D9%8A%D9%85-%D9%88%D8%AC%D8%AF%D9%8A%D8%AF-%D9%81%D9%8A-%D8%A8%D8%B4%D8%AA%D9%8A%D9%84-100064757226660/",
+                details: [
+                    "صفحة تجارية",
+                    "رقم الهاتف : 01120867730"
+                ]
+            },
+            {
+                name: "بشتيل مباشر",
+                url: "https://www.facebook.com/profile.php?id=100067774937420",
+                details: []
+            },
+            {
+                name: "مشايخ بشتيل",
+                url: "https://www.facebook.com/1Road.to.Paradise/about",
+                details: [
+                    "صفحة دينية وسطية تضم مشايخ بشتيل"
+                ]
+            },
+            {
+                name: "اخبار بشتيل البلد (لعبه)",
+                url: "https://www.facebook.com/groups/243657714539130/",
+                details: [
+                    "مجموعة",
+                    "مصطفى حمزاوي",
+                    "رقم الهاتف : 01030985423"
+                ]
+            },
+            {
+                name: "الجمعية الشرعية فرع بشتيل البلد",
+                url: "https://www.facebook.com/ALGAMAYA",
+                details: [
+                    "التوجه السياسي : سلفي",
+                    "رقم الهاتف : 01124288359"
+                ]
+            },
+            {
+                name: "اسماك التوحيد فرع بشتيل",
+                url: "https://www.facebook.com/profile.php?id=100072608433211",
+                details: [
+                    "رقم الهاتف : 01141108802"
+                ]
+            },
+            {
+                name: "ما يحدث في بشتيل",
+                url: "https://www.facebook.com/groups/1460214094671471/",
+                details: [
+                    "الادمن"
+                ]
+            },
+            {
+                name: "بشتيل سيتى",
+                url: "https://www.facebook.com/people/BshTiilCiTy-%D8%A8%D8%B4%D8%AA%D9%8A%D9%84-%D8%B3%D9%8A%D8%AA%D9%89/100063812630135/",
+                details: [
+                    "صفحه ساخره",
+                    "مخالفه لقيم المجتمع",
+                    "بدايه النشاط : 2014"
+                ]
+            },
+            {
+                name: "كشري اشرف",
+                url: "https://www.facebook.com/Koshary.Ashraaf/",
+                details: [
+                    "صفحة تجارية",
+                    "رقم الهاتف : 01121967762 - 01282360291"
+                ]
+            },
+            {
+                name: "بشتيل",
+                url: "https://www.facebook.com/BashtilAlbalad/",
+                details: [
+                    "التوجه السياسي : سلفي",
+                    "بدايه النشاط : 2022"
+                ]
+            },
+            {
+                name: "سرجة المدينة بشتيل",
+                url: "https://www.facebook.com/profile.php?id=61559166181949",
+                details: [
+                    "سرجة وعلافة وعطارة",
+                    "صفحة تجارية",
+                    "رقم الهاتف : 01015203307"
+                ]
+            },
+            {
+                name: "بشتيل",
+                url: "https://www.facebook.com/groups/507454496652776/",
+                details: [
+                    "يديرها : إسلام خيير المحامي",
+                    "رقم الهاتف : 01006345629"
+                ]
+            },
+            {
+                name: "مدرسة بشتيل الثانوية المشتركة",
+                url: "https://www.facebook.com/Bashtel.Sec/",
+                details: [
+                    "صفحة غير رسمية",
+                    "غير نشطة"
+                ]
+            },
+            {
+                name: "سنتر الجامعة التعليمي",
+                url: "https://www.facebook.com/p/%D8%B3%D9%86%D8%AA%D8%B1-%D8%A7%D9%84%D8%AC%D8%A7%D9%85%D8%B9%D9%87-%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%85%D9%8A-%D8%A8-%D8%A8%D8%B4%D8%AA%D9%8A%D9%84-61556963491894/",
+                details: [
+                    "صفحة تجارية",
+                    "رقم الهاتف : 01288497735"
+                ]
+            },
+            {
+                name: "أصدقاء جامع فلفل بشتيل",
+                url: "https://www.facebook.com/profile.php?id=100069318541114",
+                details: [
+                    "غير نشطة"
+                ]
+            },
+            {
+                name: "سنتر جراند",
+                url: "https://www.facebook.com/center.grand.edu/",
+                details: [
+                    "رقم الهاتف : 01010984424"
+                ]
+            },
+            {
+                name: "طلاب سنتر النجاح التعليمي بشتيل",
+                url: "https://www.facebook.com/ELNaga7EducationCenter",
+                details: [
+                    "رقم الهاتف : 01156603232، 01111606282"
+                ]
+            },
+            {
+                name: "سنتر البروفيسور التعليمي - بشتيل",
+                url: "https://www.facebook.com/people/%D8%B3%D9%86%D8%AA%D8%B1-%D8%A7%D9%84%D8%A8%D8%B1%D9%88%D9%81%D9%8A%D8%B3%D9%88%D8%B1-%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%85%D9%8A-%D8%A8%D8%B4%D8%AA%D9%8A%D9%84/100094471936395/",
+                details: [
+                    "صفحة تجارية",
+                    "رقم الهاتف : 01111108679"
+                ]
+            },
+            {
+                name: "كبابجي أبو إسلام بشتيل",
+                url: "https://www.facebook.com/p/%D9%83%D8%A8%D8%A7%D8%A8%D8%AC%D9%8A-%D8%A7%D8%A8%D9%88-%D8%A7%D8%B3%D9%84%D8%A7%D9%85-%D8%A8%D8%B4%D8%AA%D9%8A%D9%84-100064257632169/",
+                details: [
+                    "رقم الهاتف : 01120599666"
+                ]
+            },
+            {
+                name: "وفيات بشتيل البلد",
+                url: "https://www.facebook.com/groups/2518014138453814/",
+                details: [
+                    "المحامي إسلام خضير",
+                    "رقم الهاتف : 01006345629"
+                ]
+            },
+            {
+                name: "سنتر الكينج بشتيل",
+                url: "https://www.facebook.com/p/%D8%B3%D9%86%D8%AA%D8%B1-%D8%A7%D9%84%D9%83%D9%8A%D9%86%D8%AC-%D8%A8%D8%B4%D8%AA%D9%8A%D9%84-100089602250828/",
+                details: [
+                    "صفحة تجارية غير نشطة",
+                    "رقم الهاتف : 01156603232"
+                ]
+            },
+            {
+                name: "صفحة العاملين بكهرباء بشتيل والمنيره الغربية",
+                url: "https://www.facebook.com/saedsoha/?locale=ar_AR",
+                details: [
+                    "استفسارات العدادات مسبقة الشحن",
+                    "رقم الهاتف : 01005461980"
+                ]
+            },
+            {
+                name: "جروب أولياء أمور مدرسة بشتيل الجديدة ١",
+                url: "https://www.facebook.com/groups/225027962939073/",
+                details: [
+                    "ا محمد غراب مدير مدرسه"
+                ]
+            },
+            {
+                name: "شارع مسجد الرحمن بشتيل",
+                url: "https://www.facebook.com/profile.php?id=61550221813242",
+                details: [
+                    "شارع مسجد الرحمن بشتيل",
+                    "رقم الهاتف : 01151361611"
+                ]
+            },
+            {
+                name: "كراكيب بشتيل وأمبابة",
+                url: "https://www.facebook.com/groups/570413383342665/",
+                details: [
+                    "احمد ابو حسين",
+                    "رقم الهاتف : 01029076466"
+                ]
+            },
+            {
+                name: "شباب بشتيل إيد واحده",
+                url: "https://www.facebook.com/groups/2417766341875742/",
+                details: [
+                    "Jaser Abo Khdra",
+                    "مجموعه اعتياديه"
+                ]
+            },
+            {
+                name: "حوادث بشتيل",
+                url: "https://www.facebook.com/p/%D8%AD%D9%88%D8%A7%D8%AF%D8%AB-%D8%A8%D8%B4%D8%AA%D9%8A%D9%84-100064849388475/",
+                details: [
+                    "صفحه غير نشطه"
+                ]
+            },
+            {
+                name: "سنتر اكسفورد بشتيل",
+                url: "https://www.facebook.com/oxford.pashtil/?_rdr",
+                details: [
+                    "رقم الهاتف : 01121831750"
+                ]
+            },
+            {
+                name: "كراكيب البراجيل ولعبه وبشتيل والقوميه والوراق",
+                url: "https://www.facebook.com/groups/1752167668248020/",
+                details: [
+                    "مجموعة اعتيادية"
+                ]
+            },
+            {
+                name: "جروب بشتيل البلد وبس",
+                url: "https://www.facebook.com/groups/438945040173139/",
+                details: [
+                    "المحامي منير متولي"
+                ]
+            }
+        ];
+
+        const dataContainer = document.getElementById('data-container');
+        const downloadButton = document.getElementById('download-btn');
+
+        const renderCards = (data) => {
+            dataContainer.innerHTML = '';
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card p-6 rounded-xl relative';
+                
+                card.innerHTML = `
+                    <h2 class="text-2xl font-bold text-gray-200 mb-2">${item.name}</h2>
+                    <p class="text-sm text-gray-400 truncate mb-4">
+                        <a href="${item.url}" target="_blank" class="hover:underline text-blue-300">
+                            ${item.url}
+                        </a>
+                    </p>
+                    <ul class="text-sm text-gray-400 space-y-2">
+                        ${item.details.map(detail => `<li>${detail}</li>`).join('')}
+                    </ul>
+                `;
+                dataContainer.appendChild(card);
+            });
+        };
+
+        const generateDoc = () => {
+            const content = data.map(item => {
+                let text = `اسم الملف: ${item.name}\n`;
+                text += `الرابط: ${item.url}\n`;
+                if (item.details.length > 0) {
+                    text += "التفاصيل:\n" + item.details.map(d => `  - ${d}`).join('\n') + '\n';
+                }
+                text += "---------------------------------------\n\n";
+                return text;
+            }).join('');
+
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'تقرير-بشتيل.txt'; 
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        };
+
+        downloadButton.addEventListener('click', generateDoc);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCards(data);
+        });
+
+    </script>
+
+</body>
+</html>
